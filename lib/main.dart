@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petto_mobile/screens/login_screen.dart';
 
 void main() {
   runApp(const App());
@@ -9,15 +10,8 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text("Hello flutter!"),
-        ),
-        body: const Center(
-          child: Text("Hello world"),
-        ),
-      ),
+    return const MaterialApp(
+      home: LogInScreen(),
     );
   }
 }
