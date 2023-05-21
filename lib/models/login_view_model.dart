@@ -9,10 +9,12 @@ class RequestLoginModel {
 
 class ResponseLoginModel {
   final bool isSuccess;
+  final String message;
   final Map<String, Object> data;
 
   ResponseLoginModel({
     required this.isSuccess,
+    required this.message,
     required this.data,
   });
 }

@@ -13,10 +13,15 @@ class AuthController {
   }
 
   Future<ResponseLoginModel> login(RequestLoginModel model) async {
-    final responseDto = await authService.login(
-        RequestLoginDto(username: model.username, password: model.password));
+    final responseDto = await authService.login(RequestLoginDto(
+      username: model.username,
+      password: model.password,
+    ));
 
     return ResponseLoginModel(
-        isSuccess: responseDto.isSuccess, data: responseDto.data);
+      isSuccess: responseDto.isSuccess,
+      message: responseDto.message,
+      data: responseDto.data,
+    );
   }
 }

@@ -17,6 +17,23 @@ class AuthService {
     try {
       final response =
           await pettoApiClient.login(loginDto.username, loginDto.password);
+      final responseData = json.decode(response.body);
+      if (response.statusCode == 200) {
+        return ResponseLoginDto(
+            isSuccess: true,
+            message: responseData['message'],
+            data: {
+              "accessToken": responseData['data']['accessToken'],
+              "refreshToken": responseData['data']['refreshToken'],
+            });
+      } else {
+        return ResponseLoginDto(
+            isSuccess: false, message: responseData['message'], data: {});
+      }
+    } catch (e) {
+      return ResponseLoginDto(isSuccess: false, message: "error", data: {});
+    }
+  }
 
       if (response.statusCode == 200) {
         final responseData = json.decode(response.body);

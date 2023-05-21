@@ -9,10 +9,12 @@ class RequestLoginDto {
 
 class ResponseLoginDto {
   final bool isSuccess;
+  final String message;
   final Map<String, Object> data;
 
   ResponseLoginDto({
     required this.isSuccess,
+    required this.message,
     required this.data,
   });
 }
