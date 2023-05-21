@@ -25,4 +25,15 @@ class PettoApiClient {
             }));
     return response;
   }
+
+  Future signUp(String username, String password, String nickname) async {
+    final response = await http.post(Uri.parse("$baseUrl/api/v1/members"),
+        headers: headers,
+        body: jsonEncode({
+          'username': username,
+          'password': password,
+          'nickname': nickname,
+        }));
+    return response;
+  }
 }

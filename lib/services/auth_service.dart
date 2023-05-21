@@ -35,17 +35,26 @@ class AuthService {
     }
   }
 
+  Future<ResponseSignUpDto> signUp(RequestSignUpDto signUpDto) async {
+    try {
+      final response = await pettoApiClient.signUp(
+        signUpDto.username,
+        signUpDto.password,
+        signUpDto.nickname,
+      );
+
+      final responseData = json.decode(response.body);
       if (response.statusCode == 200) {
-        final responseData = json.decode(response.body);
-        return ResponseLoginDto(isSuccess: true, data: {"accessToken": "aaaa"});
+        return ResponseSignUpDto(
+            isSuccess: true,
+            message: responseData['message'],
+            data: {"username": responseData['data']['username']});
       } else {
-        return ResponseLoginDto(
-            isSuccess: false,
-            data: {"message": jsonDecode(response.body).message});
+        return ResponseSignUpDto(
+            isSuccess: false, message: responseData['message'], data: {});
       }
     } catch (e) {
-      return ResponseLoginDto(
-          isSuccess: false, data: {"message": e.toString()});
+      return ResponseSignUpDto(isSuccess: false, message: "error", data: {});
     }
   }
 }
