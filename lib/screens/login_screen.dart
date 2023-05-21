@@ -4,6 +4,7 @@ import 'package:petto_mobile/models/login_view_model.dart';
 import 'package:petto_mobile/screens/sign_up_screen.dart';
 import 'package:petto_mobile/screens/walk_screen.dart';
 import 'package:petto_mobile/widgets/auth_button.dart';
+import 'package:petto_mobile/widgets/showToast.dart';
 
 class LogInScreen extends StatefulWidget {
   const LogInScreen({super.key});
@@ -31,14 +32,18 @@ class _LogInScreenState extends State<LogInScreen> {
           ),
         );
         if (responseLoginModel.isSuccess) {
+          ToastComponent.show(context, "로그인에 성공하셨습니다.");
+          // print(responseLoginModel.data['accessToken']);
+          // print(responseLoginModel.data['refreshToken']);
           Navigator.of(context).push(
             MaterialPageRoute(
               builder: (context) => const WalkScreen(),
             ),
           );
         } else {
-          // 에러메시지 출력
-          print(responseLoginModel.data['message']);
+          ToastComponent.show(context, responseLoginModel.message,
+              isError: true);
+          print(responseLoginModel.message);
         }
       }
     }
